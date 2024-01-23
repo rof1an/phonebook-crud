@@ -26,4 +26,11 @@ public class ContactController {
         List<Contact> allContacts = contactService.getAllContacts();
         return mapper.toDtoList(allContacts);
     }
+
+    @PostMapping
+    public ContactDto createContact(@RequestBody ContactDto contactDto) {
+        Contact newContact = mapper.toModel(contactDto);
+        Contact addedContact = contactService.createContact(newContact);
+        return mapper.toDto(addedContact);
+    }
 }
