@@ -1,5 +1,6 @@
 package ru.rflwnq.demo.controller;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.rflwnq.demo.dto.ContactDto;
@@ -32,5 +33,12 @@ public class ContactController {
         Contact newContact = mapper.toModel(contactDto);
         Contact addedContact = contactService.createContact(newContact);
         return mapper.toDto(addedContact);
+    }
+
+    @PutMapping("{id}")
+    public ContactDto changeContact(@PathVariable("id") long id, @RequestBody ContactDto contactDto) {
+        Contact newContact = mapper.toModel(contactDto);
+        Contact updatedContact = contactService.updateContact(id, newContact);
+        return mapper.toDto(updatedContact);
     }
 }
