@@ -16,4 +16,8 @@ public class ContactService {
     public List<Contact> getAllContacts() {
         return contactRepository.findAllByOrderById();
     }
+
+    public Contact createContact(Contact contact) {
+        return contactRepository.save(contact);
+    }
 }
