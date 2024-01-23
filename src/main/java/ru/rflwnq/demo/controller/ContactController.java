@@ -37,12 +37,8 @@ public class ContactController {
 
     @PutMapping("{id}")
     public ContactDto changeContact(@PathVariable("id") long id, @RequestBody ContactDto contactDto) {
-        Contact existingContact = contactService.getContactById(id);
         Contact newContact = mapper.toModel(contactDto);
-
-        BeanUtils.copyProperties(newContact, existingContact, "id");
-        Contact addedContact = contactService.updateContact(existingContact);
-
-        return mapper.toDto(addedContact);
+        Contact updatedContact = contactService.updateContact(id, newContact);
+        return mapper.toDto(updatedContact);
     }
 }

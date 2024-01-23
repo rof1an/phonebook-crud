@@ -29,7 +29,16 @@ public class ContactService {
         return contactRepository.save(contact);
     }
 
-    public Contact updateContact(Contact contact) {
-        return contactRepository.save(contact);
+    public Contact updateContact(long id, Contact newContact) {
+        Contact existingContact = getContactById(id);
+
+        existingContact = Contact.builder()
+                .id(existingContact.getId())
+                .firstName(newContact.getFirstName())
+                .lastName(newContact.getLastName())
+                .phoneNumber(newContact.getPhoneNumber())
+                .photoUrl(newContact.getPhotoUrl())
+                .build();
+        return contactRepository.save(existingContact);
     }
 }
