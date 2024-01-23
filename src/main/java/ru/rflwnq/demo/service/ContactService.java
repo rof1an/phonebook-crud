@@ -1,11 +1,13 @@
 package ru.rflwnq.demo.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.rflwnq.demo.entity.Contact;
 import ru.rflwnq.demo.repository.ContactRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -17,7 +19,17 @@ public class ContactService {
         return contactRepository.findAllByOrderById();
     }
 
+    public Contact getContactById(long id) {
+        Optional<Contact> contactById = contactRepository.findById(id);
+        return contactById.orElseThrow(() ->
+                new EntityNotFoundException(String.format("Entity with id = %d not found", id)));
+    }
+
     public Contact createContact(Contact contact) {
+        return contactRepository.save(contact);
+    }
+
+    public Contact updateContact(Contact contact) {
         return contactRepository.save(contact);
     }
 }
