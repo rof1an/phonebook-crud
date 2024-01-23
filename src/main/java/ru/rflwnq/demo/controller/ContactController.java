@@ -41,8 +41,8 @@ public class ContactController {
         Contact newContact = mapper.toModel(contactDto);
 
         BeanUtils.copyProperties(newContact, existingContact, "id");
-        Contact returnedContact = contactService.updateContact(existingContact);
+        Contact addedContact = contactService.updateContact(existingContact);
 
-        return mapper.toDto(returnedContact);
+        return mapper.toDto(addedContact);
     }
 }
