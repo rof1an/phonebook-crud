@@ -41,4 +41,9 @@ public class ContactController {
         Contact updatedContact = contactService.updateContact(id, newContact);
         return mapper.toDto(updatedContact);
     }
+
+    @DeleteMapping("{id}")
+    public void deleteContact(@PathVariable("id") long id) {
+        contactService.deleteContact(id);
+    }
 }
